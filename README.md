@@ -1,1 +1,1 @@
-# christmas
+## Refactoring my own HTML, CSS, JS project. 
