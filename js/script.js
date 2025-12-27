@@ -1,42 +1,3 @@
-// offset += 238;
-// offset has to be different for 768px and 380px - 6 clicks !!! add if windon width > 768px, and
-// window width <= 768px
-
-// if (offset > 768) {
-// 	offset = 0;
-//  }
-// maxOffset =  1993px - 1280 = 713px; for screen width 1440px;
-// 1440 - 160 = 1280px (paddings left and right) - visible area for 1440px
-// step  = 713 / 3 = 238px;
-
-// maxOffset for screen width 768px is different and there will be 6 clicks
-// maxOffset for screen width 380px is different and there will be 6 clicks
-
-// let maxOffset = 713;
-//Событие resize обновляет значение maxOffset при изменении размера окна.
-// let maxOffset = 713;
-
-// function calculateMaxOffset() {
-// 	const visibleWidth = document.querySelector(".slider__wraper").offsetWidth - 160; // ширина видимой области
-// 	const totalWidth = sliderLine.scrollWidth; // общая ширина всех слайдов
-// 	return totalWidth - visibleWidth; // максимальное смещение
-// }
-// let maxOffset = calculateMaxOffset();
-
-// SLIDER start
-// const totalWidth = 1993;
-// const visibleWidth = document.querySelector(".slider__wraper").offsetWidth - 160;
-// function calculateMaxOffset() {
-// 	const screenWidth = window.innerWidth;
-// 	let maxClicks, maxOffset;
-// 	if (screenWidth > 768) {
-// 		maxClicks = 3;
-// 	} else {
-// 		maxClicks = 6;
-// 	}
-// 	maxOffset = (totalWidth - visibleWidth) / maxClicks;
-// 	return Math.min(totalWidth - visibleWidth, maxOffset * maxClicks);
-// }
 document.addEventListener("DOMContentLoaded", function () {
 	let offset = 0;
 	const sliderLine = document.querySelector(".slider__line");
@@ -68,18 +29,15 @@ document.addEventListener("DOMContentLoaded", function () {
 	let maxOffset = calculateMaxOffset();
 
 	window.addEventListener("resize", () => {
-		offset = 0; // Сбрасываем смещение при изменении размера экрана
+		offset = 0;
 		maxOffset = calculateMaxOffset();
-		sliderLine.style.left = -offset + "px"; // Возвращаем слайдер в начальное положение
+		sliderLine.style.left = -offset + "px";
 		updateButtons();
 	});
 	function updateButtons() {
 		console.log(`Offset: ${offset}, Max Offset: ${maxOffset}`);
 		btnLeft.disabled = offset === 0;
 		btnRight.disabled = offset >= maxOffset;
-
-		// btnLeft.disabled = offset === 0;
-		// btnRight.disabled = offset >= maxOffset;
 	}
 
 	btnRight.addEventListener("click", function () {
@@ -104,81 +62,61 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	updateButtons();
 
-	// SLIDER end
-
-
-
 	const imagesObj = {
 		"For Work": "./assets/img/gift-for-work.png",
 		"For Health": "./assets/img/gift-for-health.png",
 		"For Harmony": "./assets/img/gift-for-harmony.png",
 	};
 
+	const openModal = (gift) => {
+		const popup = document.getElementById("popup");
 
-const openModal = (gift) => {
-    const popup = document.getElementById("popup");
+		const popupImg = document.getElementById("popup-img");
+		const imagePath = imagesObj[gift.category] || "./assets/default.png";
+		popupImg.src = gift.image || imagePath;
+		popupImg.alt = gift.name;
 
-    // Обновляем изображение
-    const popupImg = document.getElementById("popup-img");
-    const imagePath = imagesObj[gift.category] || "./assets/default.png";
-    popupImg.src = gift.image || imagePath;
-    popupImg.alt = gift.name;
+		document.getElementById("popup-type").textContent = gift.category;
+		document.getElementById("popup-title").textContent = gift.name;
+		document.getElementById("popup-desc").textContent = gift.description || "Описание отсутствует";
 
-    // Обновляем текстовые элементы
-    document.getElementById("popup-type").textContent = gift.category;
-    document.getElementById("popup-title").textContent = gift.name;
-    document.getElementById("popup-desc").textContent = gift.description || "Описание отсутствует";
+		const popupType = document.getElementById("popup-type");
 
-	const popupType = document.getElementById("popup-type");
+		popupType.classList.remove("popup__type--for-work", "popup__type--for-health", "popup__type--for-harmony");
 
-	// Удаляем предыдущие классы заголовка
-popupType.classList.remove("popup__type--for-work", "popup__type--for-health", "popup__type--for-harmony");
+		switch (gift.category) {
+			case "For Work":
+				popupType.classList.add("popup__type--for-work");
+				break;
+			case "For Health":
+				popupType.classList.add("popup__type--for-health");
+				break;
+			case "For Harmony":
+				popupType.classList.add("popup__type--for-harmony");
+				break;
+			default:
+				break;
+		}
 
-// Добавляем новый класс заголовка в зависимости от категории
-switch (gift.category) {
-case "For Work":
-popupType.classList.add("popup__type--for-work");
-break;
-case "For Health":
-popupType.classList.add("popup__type--for-health");
-break;
-case "For Harmony":
-popupType.classList.add("popup__type--for-harmony");
-break;
-default:
-break;
-}
+		document.getElementById("popup-live").textContent = gift.liveRating || "+0";
+		document.getElementById("popup-create").textContent = gift.createRating || "+0";
+		document.getElementById("popup-love").textContent = gift.loveRating || "+0";
+		document.getElementById("popup-dream").textContent = gift.dreamRating || "+0"
+		popup.classList.add("popup_on");
 
+		document.body.classList.add('no-scroll');
+		document.body.classList.add('no-scroll');
 
-    // Обновляем рейтинги
-    document.getElementById("popup-live").textContent = gift.liveRating || "+0";
-    document.getElementById("popup-create").textContent = gift.createRating || "+0";
-    document.getElementById("popup-love").textContent = gift.loveRating || "+0";
-    document.getElementById("popup-dream").textContent = gift.dreamRating || "+0";
+		const popupClose = document.getElementById("popup-close");
+		popupClose.addEventListener("click", closeModal);
+	};
 
-    // Показываем модальное окно
-    popup.classList.add("popup_on");
+	const closeModal = () => {
+		const popup = document.getElementById("popup");
+		popup.classList.remove("popup_on")
+		document.body.classList.remove('no-scroll');
+	};
 
-    // Отключаем прокрутку страницы
-    document.body.classList.add('no-scroll');
-
-	 // Отключаем прокрутку страницы
-	 document.body.classList.add('no-scroll');
-
-	   // Добавляем обработчик для закрытия модального окна
-	   const popupClose = document.getElementById("popup-close");
-	   popupClose.addEventListener("click", closeModal);
-   };
-
-   const closeModal = () => {
-    const popup = document.getElementById("popup");
-    popup.classList.remove("popup_on");
-
-    // Включаем прокрутку страницы
-    document.body.classList.remove('no-scroll');
-};
-
-	// fetch API start
 	fetch("https://dummyjson.com/c/157f-c713-4657-9246")
 		.then((response) => {
 			if (!response.ok) {
@@ -211,7 +149,7 @@ break;
 							imagePath = "./assets/img/gift-for-harmony.png";
 							break;
 						default:
-							imagePath = "./assets/default.png"; // на случай, если категория не совпадает с известными
+							imagePath = "./assets/default.png";
 					}
 					const giftItem = document.createElement("div");
 					giftItem.classList.add("best-gifts__card");
@@ -220,7 +158,7 @@ break;
 					cardWrapper.classList.add("card__wrapper");
 					const giftImage = document.createElement("img");
 					giftImage.classList.add("card__image");
-					giftImage.src = gift.image || imagePath; //Используем изображение по умолчанию, если его нет
+					giftImage.src = gift.image || imagePath;
 					giftImage.alt = gift.name;
 					const cardContent = document.createElement("div");
 					cardContent.classList.add("card__content");
@@ -240,8 +178,7 @@ break;
 					giftItem.appendChild(cardWrapper);
 					bestGiftsContainer.appendChild(giftItem);
 
-					 // Добавляем обработчик события для открытия модального окна
-					 giftItem.addEventListener("click", () => openModal(gift));
+					giftItem.addEventListener("click", () => openModal(gift));
 				});
 			};
 			const randomGifts = getRandomGifts(allGifts, 4);
@@ -249,14 +186,13 @@ break;
 		})
 		.catch((error) => console.error("Fetch error:", error));
 
-// Закрытие модального окна при клике вне его
-document.addEventListener("click", (event) => {
-    const popup = document.getElementById("popup");
-    if (event.target === popup) {
-        closeModal();
-    }
-});
-	// TIMER START
+	document.addEventListener("click", (event) => {
+		const popup = document.getElementById("popup");
+		if (event.target === popup) {
+			closeModal();
+		}
+	});
+
 	function startTimer(display) {
 		function updateTimer() {
 			const now = new Date();
@@ -284,6 +220,4 @@ document.addEventListener("click", (event) => {
 			console.error('Element with id "timer" not found.');
 		}
 	};
-	// TIMER END
-
 });
