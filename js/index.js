@@ -20,13 +20,13 @@ document.addEventListener("DOMContentLoaded", function () {
          document.body.classList.remove("menu-open");
 
          setTimeout(() => {
-             window.location.href = targetUrl;
+             globalThis.location.href = targetUrl;
          }, 300);
      });
  });
 
  document.querySelector(".header__logo").addEventListener("click", (event) => {
-    const isHomePage = window.location.pathname === "/";
+    const isHomePage = globalThis.location.pathname === "/";
     const logoUrl = event.currentTarget.getAttribute("href");
 
     if (isHomePage) {
@@ -41,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.classList.remove("menu-open");
 
         setTimeout(() => {
-            window.location.href = logoUrl;
+            globalThis.location.href = logoUrl;
         }, 300);
     }
   });
