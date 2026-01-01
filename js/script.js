@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
 	let offset = 0;
 	const sliderLine = document.querySelector(".slider__line");
-	const slides = document.querySelectorAll(".slider__item");
 	const btnLeft = document.querySelector(".slider__btn--left");
 	const btnRight = document.querySelector(".slider__btn--right");
 
@@ -104,7 +103,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		document.getElementById("popup-dream").textContent = gift.dreamRating || "+0"
 		popup.classList.add("popup_on");
 
-		document.body.classList.add('no-scroll');
 		document.body.classList.add('no-scroll');
 
 		const popupClose = document.getElementById("popup-close");

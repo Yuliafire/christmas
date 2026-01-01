@@ -1034,11 +1034,6 @@
     color: #FFFFFF;
 }
 
-.timer__unit-word {
-    letter-spacing: 0.20em;
-    margin-top: -2px;
-}
-
 .timer__unit {
     display: flex;
     flex-direction: column;

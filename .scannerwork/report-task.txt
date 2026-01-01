@@ -1,0 +1,7 @@
+organization=yuliafire
+projectKey=Yuliafire_christmas
+serverUrl=https://sonarcloud.io
+serverVersion=8.0.0.78018
+dashboardUrl=https://sonarcloud.io/dashboard?id=Yuliafire_christmas
+ceTaskId=AZt6LLOPKakh6emPcBRa
+ceTaskUrl=https://sonarcloud.io/api/ce/task?id=AZt6LLOPKakh6emPcBRa

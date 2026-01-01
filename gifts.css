@@ -1,25 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
 
-.menu__item--open .menu__link {
-    background: rgba(255, 70, 70, 0.1);
-    padding: 12px 20px;
-    border-radius: 12px;
-}
-
-.menu__item--open .menu__link {
-    color: #FF4646;
-}
-
-.menu__item:hover .menu__link {
-    color: #FF4646;
-}
-
-.menu__link--disabled {
-    cursor: default;
-}
-
-
 @media (min-width: 381px) and (max-width: 768px) {
     .menu__link--disabled {
         cursor: default;
@@ -31,7 +12,6 @@
         cursor: default;
     }
 }
-
 
 .menu__link--disabled:hover {
     cursor: default;

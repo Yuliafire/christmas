@@ -307,9 +307,6 @@ html {
     background: rgba(255, 70, 70, 0.1);
     padding: 12px 20px;
     border-radius: 12px;
-}
-
-.menu__item--open .menu__link {
     color: #FF4646;
 }
 
@@ -536,7 +533,6 @@ html {
     }
 }
 
-.contacts__item-phone,
 .contacts__item-action {
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
@@ -549,6 +545,14 @@ html {
 }
 
 .contacts__item-phone {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #181C29;
+    transition: color 0.5s ease;
     font-size: 1.5rem;
     line-height: 152%;
     letter-spacing: 0.16em;
@@ -667,12 +671,8 @@ html {
         transition: color 0.5s ease;
     }
 
-
     .copyright__caption:hover {
         color: #FF4646;
-    }
-
-    .copyright__caption:hover {
         cursor: pointer;
     }
 }
