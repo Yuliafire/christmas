@@ -493,8 +493,7 @@ html {
     transition: color 0.5s ease;
 }
 
-.contacts__item-phone,
-.contacts__item-action {
+.contacts__item-phone {
     transition: color 0.5s ease;
 }
 
@@ -542,6 +541,10 @@ html {
     text-decoration: none;
     color: #181C29;
     transition: color 0.5s ease;
+    height: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.52;
+    letter-spacing: 0.08em;
 }
 
 .contacts__item-phone {
@@ -556,14 +559,6 @@ html {
     font-size: 1.5rem;
     line-height: 152%;
     letter-spacing: 0.16em;
-}
-
-.contacts__item-action {
-    height: 1.5rem;
-    font-size: 1rem;
-    line-height: 1.52;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
 }
 
 .footer__bottom {
@@ -678,7 +673,6 @@ html {
 }
 
 @media (hover: none) {
-
     .header__logo,
     .menu__item,
     .menu__link,

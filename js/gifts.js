@@ -127,10 +127,10 @@ document.addEventListener("DOMContentLoaded", function () {
 			document.querySelectorAll(".card").forEach((card) => {
 				card.addEventListener("click", () => {
 					const gift = {
-						category: card.getAttribute("data-category"),
-						image: card.getAttribute("data-image"),
-						name: card.getAttribute("data-name"),
-						description: card.getAttribute("data-description"),
+						category: card.dataset.category,
+						image: card.dataset.image,
+						name: card.dataset.name,
+						description: card.dataset.description,
 					};
 					openModal(gift);
 				});
@@ -149,14 +149,12 @@ document.addEventListener("DOMContentLoaded", function () {
 			});
 
 			const filterGiftsByCategory = (category) => {
-				console.log(`Filtering by category: ${category}`);
 				if (category === "all") {
 					renderBestGifts(allGifts);
 				} else {
 					const filteredGifts = allGifts.filter(
 						(gift) => gift.category.toLowerCase() === category,
 					);
-					console.log(`Filtered gifts:`, filteredGifts);
 					renderBestGifts(filteredGifts);
 				}
 			};
@@ -168,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
 						activeTab.classList.remove("gifts__tabs-tab--active");
 					}
 					event.target.classList.add("gifts__tabs-tab--active");
-					const category = event.target.getAttribute("data-category");
+					const category = event.target.dataset.category; 
 					filterGiftsByCategory(category);
 				});
 			});
