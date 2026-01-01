@@ -1,3 +1,23 @@
+function startTimer(display) {
+	function updateTimer() {
+		const now = new Date();
+		const nextYear = new Date(Date.UTC(now.getUTCFullYear() + 1, 0, 1));
+		const diff = nextYear - now;
+		const days = Math.floor(diff / (24 * 60 * 60 * 1000));
+		const hours = Math.floor(
+			(diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000),
+		);
+		const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
+		const seconds = Math.floor((diff % (60 * 1000)) / 1000);
+		display.querySelector("#days").textContent = days;
+		display.querySelector("#hours").textContent = hours;
+		display.querySelector("#minutes").textContent = minutes;
+		display.querySelector("#seconds").textContent = seconds;
+	}
+	updateTimer();
+	setInterval(updateTimer, 1000);
+}
+
 document.addEventListener("DOMContentLoaded", function () {
 	let offset = 0;
 	const sliderLine = document.querySelector(".slider__line");
@@ -191,31 +211,6 @@ document.addEventListener("DOMContentLoaded", function () {
 		}
 	});
 
-	function startTimer(display) {
-		function updateTimer() {
-			const now = new Date();
-			const nextYear = new Date(Date.UTC(now.getUTCFullYear() + 1, 0, 1));
-			const diff = nextYear - now;
-			const days = Math.floor(diff / (24 * 60 * 60 * 1000));
-			const hours = Math.floor(
-				(diff % (24 * 60 * 60 * 1000)) / (60 * 60 * 1000),
-			);
-			const minutes = Math.floor((diff % (60 * 60 * 1000)) / (60 * 1000));
-			const seconds = Math.floor((diff % (60 * 1000)) / 1000);
-			display.querySelector("#days").textContent = days;
-			display.querySelector("#hours").textContent = hours;
-			display.querySelector("#minutes").textContent = minutes;
-			display.querySelector("#seconds").textContent = seconds;
-		}
-		updateTimer();
-		setInterval(updateTimer, 1000);
-	}
-	window.onload = function () {
-		const display = document.querySelector("#timer");
-		if (display) {
-			startTimer(display);
-		} else {
-			console.error('Element with id "timer" not found.');
-		}
-	};
+	const timerDisplay = document.querySelector("#timer");
+	if (timerDisplay) startTimer(timerDisplay);
 });
